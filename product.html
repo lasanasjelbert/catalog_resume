@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 90px;
+           
+ }
+
+        .product-card {
+            border: 3px solid black;
+            border-radius: 8px;
+            padding: 10px;
+            width: 250px; /* Adjust as needed */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            height: 700px;
+            grid-template-columns: repeat(4, 1fr);
+
+
+
+        }
+
+        .product-image {
+            object-fit: cover;
+            max-width: 100%;
+            display: block;
+             margin: 0 auto; 
+            margin-bottom: 25px;
+            height: auto;
+            border-radius: 10px;
+            padding-bottom: 20px;
+        }
+      header  h1{
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .label{
+            text-align: center;
+            background-color: black;
+            color: white;
+            font-size: 25px;
+          
+        }
+
+        .price{
+
+            text-align: center;
+        }
+        .details{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Velocity Kicks </h1></header>
+    <div class="product-container" id="output"></div>
+
+    <script>
+        fetch('products.json') // Assuming 'products.json' is the correct path to your JSON file
+            .then(response => response.json())
+            .then(data => {
+                let displayOutput = "";
+                for (const item of data) {
+                    displayOutput += `
+                        <div class="product-card">
+                            <img src="${item.image}" alt="${item.productName}" class="product-image">
+                            <h3  class = "label">${item.productName}</h3>
+                            <p class = "price"> $${item.price}</p>
+                            
+                        </div>
+                    `;
+                }
+                document.querySelector("#output").innerHTML = displayOutput;
+            })
+    </script>
+</body>
+</html>
